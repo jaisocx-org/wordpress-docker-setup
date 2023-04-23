@@ -1,0 +1,53 @@
+version: '2'
+services:
+  jaisocx_http:
+    build:
+      context: ./docker/jaisocx-http
+    volumes:
+      - ./wordpress/:/var/www/wordpress/:delegated
+    depends_on:
+      - php
+    ports:
+        - 80:80
+    networks:
+      - jaisocx
+    environment:
+      PHP_FPM_HOST: "php:9000"
+      JAVA_XMS: "1g"
+      JAVA_XMX: "1g"
+
+  php:
+    container_name: php
+    build:
+      context: ./docker/php
+      args:
+        TIMEZONE: "Europe/Kyiv"
+        ENABLE_XDEBUG: 1
+    volumes:
+      - ./wordpress/:/var/www/wordpress/:delegated
+    networks:
+      - jaisocx
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      PHP_IDE_CONFIG: "serverName=docker"
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3310:3306
+    volumes:
+      - ./docker/mysql/volumes:/var/lib/mysql:delegated
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d:delegated
+      - ./docker/mysql/init/conf/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf:delegated
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - jaisocx
+
+networks:
+  jaisocx:
+    driver: bridge

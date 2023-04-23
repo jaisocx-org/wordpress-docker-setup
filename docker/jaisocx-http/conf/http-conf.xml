@@ -1,0 +1,26 @@
+<conf>
+    <conf-idm path="/usr/lib/jaisocx-http/apps/congratulations/conf/idm-conf.xml"/>
+    <conf-http>
+        <servers>
+            <server port="80" alternative-port="2288" publish-charset="UTF-8" src-charset="UTF-8">
+                <domain
+                    name="localhost"
+                    document-root="/var/www/wordpress"
+                    publish-charset="UTF-8">
+                    <alias art="folder"
+                           url="/"
+                           path="/var/www/wordpress/"
+                           cache="update"
+                           compression="YES"
+                           list="NO"
+                           each-folder-content-file-name="index.php"/>
+                    <alias art="file"
+                           url="/${any}"
+                           path="/var/www/wordpress/index.php"
+                           cache="update"
+                           compression="YES"/>
+                </domain>
+            </server>
+        </servers>
+    </conf-http>
+</conf>
