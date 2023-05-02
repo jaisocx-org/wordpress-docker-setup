@@ -1,6 +1,7 @@
-FROM jaisocx/webserver:2.0
+FROM jaisocx/webserver:2.1
 
 COPY ./conf /usr/lib/jaisocx-http/apps/congratulations/conf
+COPY ./server.properties /usr/lib/jaisocx-http/etc/server.properties
 
 WORKDIR /usr/lib/jaisocx-http
 

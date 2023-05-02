@@ -11,14 +11,12 @@
                            url="/"
                            path="/var/www/wordpress/"
                            cache="update"
-                           compression="YES"
-                           list="NO"
+                           list="false"
                            each-folder-content-file-name="index.php"/>
                     <alias art="file"
                            url="/${any}"
                            path="/var/www/wordpress/index.php"
-                           cache="update"
-                           compression="YES"/>
+                           cache="update"/>
                 </domain>
             </server>
         </servers>
