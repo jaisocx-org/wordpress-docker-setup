@@ -1,4 +1,4 @@
-FROM jaisocx/webserver:2.3.04
+FROM jaisocx/webserver:2.3.08
 
 COPY ./conf /usr/lib/jaisocx-http/apps/congratulations/conf
 COPY ./server.properties /usr/lib/jaisocx-http/etc/server.properties
