@@ -1,4 +1,4 @@
-FROM jaisocx/webserver:alpine.3.0.01
+FROM jaisocx/webserver:linux.latest
 
 COPY ./conf /usr/lib/jaisocx-http/apps/congratulations/conf
 COPY ./server.properties /usr/lib/jaisocx-http/etc/server.properties
